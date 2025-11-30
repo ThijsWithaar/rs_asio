@@ -1,5 +1,6 @@
 #pragma once
 
+#include "stdafx.h"
 #include "ComBaseUnknown.h"
 
 class RSDeviceCollection : public ComBaseUnknown<IMMDeviceCollection>

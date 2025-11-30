@@ -42,6 +42,10 @@ struct RSConfig
 	bool enableWasapiInputs = false;
 	bool enableAsioOutput = false;
 	bool enableAsioInputs = false;
+#ifdef WINE_DEVICES
+	bool enablePipeWire = false;
+	bool enableLibUSB = false;
+#endif
 	RSAsioConfig asioConfig;
 };
 

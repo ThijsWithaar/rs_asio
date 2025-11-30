@@ -1,0 +1,64 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Rocksmith Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${env:HOME}/.steam/debian-installation/steamapps/common/SteamLinuxRuntime_sniper/pressure-vessel/bin/steam-runtime-launcher-interface-0",
+			"args": [
+				"${env:HOME}/.steam/steam/steamapps/common/Proton 10.0/proton",
+				"waitforexitandrun",
+				"${env:HOME}/.steam/debian-installation/steamapps/common/Rocksmith2014/Rocksmith2014.exe",
+				"-uplay_steam_mode"
+			],
+			"cwd": "${env:HOME}/.steam/debian-installation/steamapps/common/Rocksmith2014",
+			"environment": [
+				{
+					"name": "SteamAppId",
+					"value": "221680"
+				},
+				{
+					"name": "SteamGameId",
+					"value": "221680"
+				},
+				{
+					"name": "STEAM_COMPAT_CLIENT_INSTALL_PATH",
+					"value": "${env:HOME}/.steam/debian-installation"
+				},
+				{
+					"name": "STEAM_COMPAT_SHADER_PATH",
+					"value": "${env:HOME}/.steam/steam/steamapps/shadercache/221680"
+				},
+				{
+					"name": "STEAM_COMPAT_MEDIA_PATH",
+					"value": "${env:HOME}/.steam/steam/steamapps/shadercache/221680/fozmediav1",
+				},
+				{
+					"name": "STEAM_COMPAT_INSTALL_PATH",
+					"value": "${env:HOME}/.steam/steam/steamapps/common/Rocksmith2014 "
+				},
+				{
+					"name": "STEAM_COMPAT_APP_ID",
+					"value": "221680"
+				},
+				{
+					"name": "STEAM_COMPAT_DATA_PATH",
+					"value": "${env:HOME}/.steam/debian-installation/steamapps/compatdata/221680"
+				},
+				{
+					"name": "SteamClientLaunch",
+					"value": "1"
+				},
+				{
+					"name": "SteamOverlayGameId",
+					"value": "221680"
+				},
+				{
+					"name": "SteamEnv",
+					"value": "1"
+				}
+			],
+		}
+	]
+}

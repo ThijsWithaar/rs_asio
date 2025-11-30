@@ -34,6 +34,19 @@ If you're using Ubuntu 12.04 LTS check [this page](docs/linux/ubuntu_1204_lts.md
 
 Some people have had success using RS ASIO with [wineasio](https://www.wineasio.org/) on linux. You can check out [this issue](https://github.com/mdias/rs_asio/issues/99) for more information.
 
+#### Using RS ASIO on linux, with native audio
+
+An alternative to using wineasio is to directly call into linux from RS_ASIO.
+This avoids both the ASIO and JACK intermediate steps, with hopefully reduced latency as result.
+
+To set it up, take the following steps:
+
+1. Build the `RS_ASIO.dll` and `RS_ASIO.dll.so`
+2. Place them in the game folder
+3. Add the game folder to `EXTRA_LD_LIBRARY_PATH` environment variable so that wine can find the `RS_ASIO.dll.so` linux library
+4. Follow the [Configuration Guide](#Basic-configuration-guide), and look into `RS_ASIO-log.txt` to find the names of the native audio interfaces, starting with `wineusb:` and `wireplumber:`.
+
+
 ## Audio Interfaces reported to work well
 
 <details>

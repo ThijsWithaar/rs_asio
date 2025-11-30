@@ -1,0 +1,25 @@
+{
+	"makefile.configurations": [
+		{
+			"name": "Default",
+			"makeArgs": [
+				"-j",
+				"16"
+			]
+		}
+	],
+	"makefile.buildBeforeLaunch": true,
+	"makefile.clearOutputBeforeBuild": true,
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "${userHome}/.steam/debian-installation/steamapps/common/Rocksmith2014",
+			"binaryPath": "${userHome}/.steam/debian-installation/steamapps/common/SteamLinuxRuntime_sniper/pressure-vessel/bin/steam-runtime-launcher-interface-0",
+			"binaryArgs": [
+				"${userHome}/.steam/steam/steamapps/common/Proton 10.0/proton",
+				"waitforexitandrun",
+				"${userHome}/.steam/debian-installation/steamapps/common/Rocksmith2014/Rocksmith2014.exe",
+				"-uplay_steam_mode"
+			],
+		}
+	]
+}

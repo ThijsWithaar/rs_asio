@@ -5,6 +5,12 @@
 #include "AsioHelpers.h"
 #include "AsioSharedHost.h"
 
+#ifdef WINE_DEVICES
+#include "wine/PipeWireDeviceEnum.h"
+#include "wine/LibUsbDeviceEnum.h"
+#endif
+
+
 static void LoadConfigIni(RSConfig& out);
 
 static RSConfig& GetConfig()
@@ -43,6 +49,22 @@ static void AddAsioDevices(RSAggregatorDeviceEnum& rsEnum, bool enableOutputs, b
 	asioEnum->Release();
 }
 
+#ifdef WINE_DEVICES
+static void AddPipeWireDevices(RSAggregatorDeviceEnum& rsEnum)
+{
+	auto pwEnum = new PipeWireDeviceEnum();
+	rsEnum.AddDeviceEnumerator(pwEnum, true, true);
+	pwEnum->Release();
+}
+
+static void AddLibUsbDevices(RSAggregatorDeviceEnum& rsEnum)
+{
+	auto lusbEnum = new LibUsbDeviceEnum();
+	rsEnum.AddDeviceEnumerator(lusbEnum, true, true);
+	lusbEnum->Release();
+}
+#endif
+
 void SetupDeviceEnumerator(RSAggregatorDeviceEnum& rsEnum)
 {
 	RSConfig& config = GetConfig();
@@ -64,6 +86,16 @@ void SetupDeviceEnumerator(RSAggregatorDeviceEnum& rsEnum)
 	{
 		AddAsioDevices(rsEnum, config.enableAsioOutput, config.enableAsioInputs);
 	}
+#ifdef WINE_DEVICES
+	if (config.enablePipeWire)
+	{
+		AddPipeWireDevices(rsEnum);
+	}
+	if(config.enableLibUSB)
+	{
+		AddLibUsbDevices(rsEnum);
+	}
+#endif
 	AddWasapiDevices(rsEnum, config.enableWasapiOutputs.value_or(false), config.enableWasapiInputs);
 }
 
@@ -301,6 +333,16 @@ static void LoadConfigIni(RSConfig& out)
 						parseBoolString(val, out.enableAsioOutput);
 						out.enableAsioInputs = out.enableAsioOutput;
 					}
+#ifdef WINE_DEVICES
+					else if (key == "enablepipewire")
+					{
+						parseBoolString(val, out.enablePipeWire);
+					}
+					else if (key == "enableLibUSB")
+					{
+						parseBoolString(val, out.enableLibUSB);
+					}
+#endif
 				}
 				else if (currentSection == SectionAsio)
 				{
